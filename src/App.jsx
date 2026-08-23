@@ -1,92 +1,109 @@
-import { useEffect, useState } from 'react'
-import { ArrowDown, ArrowRight, Check, ChevronLeft, ChevronRight, CircleCheck, Leaf, Menu, MoveUpRight, Package, ShieldCheck, Thermometer, X, Zap } from 'lucide-react'
-import { allProducts, butterPaperProducts, foilProducts, galleryItems } from './data/products'
-import './App.css'
+import { useEffect, useState } from "react";
+import {
+  butterPaperProducts,
+  foilProducts,
+  galleryItems,
+} from "./data/products";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import Stats from "./components/Stats";
+import About from "./components/About";
+import Mission from "./components/Mission";
+import SignatureProduct from "./components/SignatureProduct";
+import Products from "./components/Products";
+import Specifications from "./components/Specifications";
+import Applications from "./components/Applications";
+import Benefits from "./components/Benefits";
+import Sustainability from "./components/Sustainability";
+import Gallery from "./components/Gallery";
+import Contact from "./components/Contact";
+import CTA from "./components/CTA";
+import Footer from "./components/Footer";
+import ProductModal from "./components/ProductModal";
+import "./App.css";
 
-function App() {
-  const [activeSection, setActiveSection] = useState('home')
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [selectedProduct, setSelectedProduct] = useState(null)
-  const [galleryFilter, setGalleryFilter] = useState('All')
-  const [lightboxIndex, setLightboxIndex] = useState(null)
+export default function App() {
+  const [activeSection, setActiveSection] = useState("home");
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [galleryFilter, setGalleryFilter] = useState("All");
+  const [lightboxIndex, setLightboxIndex] = useState(null);
 
   useEffect(() => {
-    const sections = document.querySelectorAll('main section[id]')
-    const observer = new IntersectionObserver((entries) => {
-      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
-      if (visible) setActiveSection(visible.target.id)
-    }, { rootMargin: '-20% 0px -65% 0px' })
-    sections.forEach((section) => observer.observe(section))
-    return () => observer.disconnect()
-  }, [])
+    const sections = document.querySelectorAll("main section[id]");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActiveSection(visible.target.id);
+      },
+      { rootMargin: "-20% 0px -65% 0px" },
+    );
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
-    document.body.style.overflow = selectedProduct || lightboxIndex !== null ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [selectedProduct, lightboxIndex])
+    document.body.style.overflow =
+      selectedProduct || lightboxIndex !== null ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedProduct, lightboxIndex]);
 
   const navigate = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-    setMenuOpen(false)
-  }
-
-  const filteredGallery = galleryFilter === 'All' ? galleryItems : galleryItems.filter((item) => item.category === galleryFilter)
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setMenuOpen(false);
+  };
 
   return (
     <div className="site-shell">
-      <header className={`navbar ${activeSection !== 'home' ? 'scrolled' : ''}`}>
-        <button className="brand" onClick={() => navigate('home')} aria-label="Rivaru World home"><span>RIVARU</span><strong>WORLD™</strong><small>WARUDKAR'S COMPANY™</small></button>
-        <nav className={menuOpen ? 'nav-links open' : 'nav-links'} aria-label="Primary navigation">
-          {[['home', 'Home'], ['about', 'About'], ['products', 'Products'], ['applications', 'Applications'], ['sustainability', 'Sustainability'], ['gallery', 'Gallery'], ['contact', 'Contact']].map(([id, label]) => <button className={activeSection === id ? 'active' : ''} key={id} onClick={() => navigate(id)}>{label}</button>)}
-          <button className="nav-cta" onClick={() => navigate('contact')}>Get in touch <ArrowRight size={15} /></button>
-        </nav>
-        <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation" aria-expanded={menuOpen}>{menuOpen ? <X /> : <Menu />}</button>
-      </header>
-
+      <Navbar
+        activeSection={activeSection}
+        menuOpen={menuOpen}
+        setMenuOpen={setMenuOpen}
+        navigate={navigate}
+      />
       <main>
-        <section className="hero" id="home">
-          <div className="hero-shape shape-one" /><div className="hero-shape shape-two" />
-          <div className="hero-copy reveal"><p className="eyebrow">FOOD-GRADE ALUMINIUM FOIL <span /></p><h1>Protecting freshness.<br /><em>Preserving flavour.</em></h1><p className="hero-lead">Premium aluminium foil solutions for modern kitchens, restaurants and food service.</p><p className="hero-text">Food-grade, reliable and 100% recyclable aluminium foil designed for households, catering and professional food-service applications.</p><div className="button-row"><button className="button button-gold" onClick={() => navigate('products')}>Explore products <ArrowRight size={17} /></button><button className="button button-ghost" onClick={() => navigate('contact')}>Contact us <MoveUpRight size={17} /></button></div></div>
-          <div className="hero-product reveal delay-one"><div className="product-glow" /><div className="foil-roll"><div className="roll-core" /><div className="roll-label">FOIL<br /><b>AROMASHIELD</b><small>Food Grade · 100% Recyclable</small></div></div><div className="hero-stamp"><span>100%</span><small>RECYCLABLE<br />ALUMINIUM</small></div></div>
-          <button className="scroll-cue" onClick={() => navigate('about')}><ArrowDown size={16} /> Scroll to discover</button>
-        </section>
-
-        <section className="stats container"><div><strong>2023</strong><span>Established</span></div><div><strong>100%</strong><span>Recyclable aluminium</span></div><div><strong>UK & worldwide</strong><span>Markets</span></div><div><strong>Food grade</strong><span>Materials</span></div></section>
-
-        <section className="about section container" id="about"><div className="about-image image-frame"><img src="https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&w=1200&q=85" alt="Fresh ingredients prepared in a modern kitchen" /><span className="image-note">SINCE<br /><b>2023</b></span></div><div className="about-copy"><p className="eyebrow dark">THE RIVARU WORLD STORY <span /></p><h2>Material that moves<br /><em>with your ambition.</em></h2><p>Rivaru World is a trusted manufacturer of high-quality aluminium household and catering products, proudly based in India and supplying customers across the UK and international markets.</p><p>Established in 2023, we are committed to delivering safe, reliable and premium food-contact materials for homes, restaurants, takeaways, bakeries and food-service businesses.</p><div className="mini-highlights"><div><ShieldCheck /><span>Safe, food-contact<br />materials</span></div><div><Leaf /><span>Quality with<br />responsibility</span></div></div></div></section>
-
-        <section className="mission"><div className="container mission-inner"><div><p className="eyebrow">OUR MISSION <span /></p><h2>Built for the moments<br />that matter <em>most.</em></h2></div><p>Our mission is to provide world-class aluminium-foil products that support everyday cooking, baking, packaging and food-service operations. We aim to offer a product range that maintains high performance while ensuring affordability, durability and environmental responsibility.</p></div></section>
-
-        <section className="signature section container"><div className="signature-copy"><p className="eyebrow dark">THE SIGNATURE PRODUCT <span /></p><h2>Foil <em>AromaShield™</em></h2><p className="signature-sub">Premium aluminium foil for home, cooking, catering & professional use.</p><p>Designed to preserve food moisture, flavour and aroma while providing a hygienic protective barrier during cooking, storage and transport.</p><button className="text-link" onClick={() => setSelectedProduct(foilProducts[3])}>Discover the range <ArrowRight size={17} /></button></div><div className="signature-visual"><img src="https://images.unsplash.com/photo-1606914501449-5a96bce24ca7?auto=format&fit=crop&w=1200&q=85" alt="Aluminium foil protecting a prepared meal" /><div className="feature-float"><Package /><span>FOIL<br /><b>AROMASHIELD</b></span></div></div></section>
-
-        <section className="products section" id="products"><div className="container"><div className="section-heading"><div><p className="eyebrow dark">THE RANGE <span /></p><h2>Products made for<br /><em>every table.</em></h2></div><p>Reliable food-contact solutions, thoughtfully made for home cooks, food businesses and professional kitchens.</p></div><ProductGroup title="Aluminium Foil" products={foilProducts} onSelect={setSelectedProduct} /><ProductGroup title="Foil AromaShield Butter Paper" products={butterPaperProducts} onSelect={setSelectedProduct} butter /></div></section>
-
-        <section className="specs section container"><div className="specs-intro"><p className="eyebrow dark">PRODUCT SPECIFICATIONS <span /></p><h2>Performance you<br /><em>can feel.</em></h2><p>A dependable protective layer between food and the world around it. Built for the pace of real kitchens.</p><div className="specs-image"><img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=85" alt="Professional kitchen preparation" /></div></div><div className="spec-grid"><Spec title="Material & composition" items={['Aluminium alloy: 8011 / 8079 / 1235 (food-grade)', 'Temper: Soft (O)', 'Thickness: 11 micron (± manufacturing tolerance)', 'Surface finish: Clean, smooth, odourless and non-toxic', 'Core: Food-safe recycled cardboard']} /><Spec title="Performance properties" items={['Heat resistance: Suitable for oven use up to 660°C', 'Freezer safe: Yes', 'Barrier: Protects from moisture, light, air & contamination', 'Strength: High tear resistance', 'Food safety: Compliant with UK Food-Contact Standards']} /></div></section>
-
-        <section className="applications section" id="applications"><div className="container"><div className="section-heading light"><div><p className="eyebrow">WHERE IT BELONGS <span /></p><h2>Designed for everyday life<br />& <em>professional kitchens.</em></h2></div><p>From the first fold at home to the final delivery at a customer's door, AromaShield helps keep food at its best.</p></div><div className="application-grid">{[['Home cooking & baking', 'For everyday food preparation and baking.', 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=85'], ['Takeaway & food wrapping', 'For protecting food during packaging and transport.', 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85'], ['Catering & commercial kitchens', 'For restaurants, catering businesses and professional kitchens.', 'https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=800&q=85'], ['Grilling, roasting & refrigeration', 'For oven, grill, roasting, freezing and food storage.', 'https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=800&q=85']].map(([title, text, image], index) => <article className="application-card" key={title}><img src={image} alt={title} /><div><span>0{index + 1}</span><h3>{title}</h3><p>{text}</p></div></article>)}</div></div></section>
-
-        <section className="benefits section container"><div className="section-heading"><div><p className="eyebrow dark">WHY AROMASHIELD <span /></p><h2>Small details.<br /><em>Big difference.</em></h2></div></div><div className="benefit-grid">{[[ShieldCheck, 'Food grade', 'Safe for food-contact applications'], [Thermometer, 'Heat resistant', 'Suitable for oven applications'], [Package, 'Freezer safe', 'Maintains strength at low temperatures'], [Zap, 'Barrier protection', 'Helps protect food from moisture, light and air'], [CircleCheck, 'Strong & durable', 'High tear resistance for wrapping and cooking'], [Leaf, '100% recyclable', 'Made from recyclable aluminium']].map(([Icon, title, text]) => <div className="benefit" key={title}><Icon /><h3>{title}</h3><p>{text}</p></div>)}</div></section>
-
-        <section className="sustainability section" id="sustainability"><div className="container sustainability-inner"><div className="sustain-copy"><p className="eyebrow">A BETTER CYCLE <span /></p><h2>Sustainability<br /><em>that matters.</em></h2><p>AromaShield aluminium foil products are made from 100% recyclable aluminium. Better materials help create better habits, from kitchen to recycling bin.</p><div className="sustain-points">{['100% recyclable aluminium', 'Low-waste production processes', 'Eco-friendly sourcing of raw materials', 'Recycled cardboard cores', 'Reduced energy consumption through process optimisation', 'Supports circular-economy practices'].map((point) => <span key={point}><Check size={15} />{point}</span>)}</div></div><div className="recycle-orbit"><div className="orbit-ring ring-one" /><div className="orbit-ring ring-two" /><div className="recycle-symbol">↻<small>100%</small></div></div></div><div className="container recycle-steps"><div><p className="eyebrow">HOW TO RECYCLE ALUMINIUM FOIL <span /></p><h3>Make the next step<br /><em>an easy one.</em></h3></div>{[['01', 'Wipe', 'off excess food residue'], ['02', 'Scrunch', 'foil into a ball'], ['03', 'Place', 'in the appropriate aluminium/metal recycling bin']].map(([number, title, text]) => <div className="recycle-step" key={number}><b>{number}</b><strong>{title}</strong><span>{text}</span></div>)}<p className="council-note">Check your local council's recycling guidelines.</p></div></section>
-
-        <section className="gallery section container" id="gallery"><div className="section-heading"><div><p className="eyebrow dark">A CLOSER LOOK <span /></p><h2>Made for the<br /><em>beautifully practical.</em></h2></div><p>Food, preparation and packaging, captured in the world Rivaru World is made for.</p></div><div className="gallery-tabs">{['All', 'Products', 'Food', 'Packaging', 'Butter Paper', 'Lifestyle'].map((filter) => <button className={galleryFilter === filter ? 'selected' : ''} onClick={() => setGalleryFilter(filter)} key={filter}>{filter}</button>)}</div><div className="gallery-grid">{filteredGallery.map((item, index) => <button className="gallery-item" key={item.title} onClick={() => setLightboxIndex(index)}><img src={item.image} alt={item.title} loading="lazy" /><span>{item.category}<b>{item.title}</b></span></button>)}</div></section>
-
+        <Hero navigate={navigate} />
+        <Stats />
+        <About />
+        <Mission />
+        <SignatureProduct
+          product={foilProducts[3]}
+          onSelect={setSelectedProduct}
+        />
+        <Products
+          foilProducts={foilProducts}
+          butterPaperProducts={butterPaperProducts}
+          onSelect={setSelectedProduct}
+        />
+        <Specifications />
+        <Applications />
+        <Benefits />
+        <Sustainability />
+        <Gallery
+          items={galleryItems}
+          filter={galleryFilter}
+          setFilter={setGalleryFilter}
+          lightboxIndex={lightboxIndex}
+          setLightboxIndex={setLightboxIndex}
+        />
         <Contact />
-        <section className="final-cta"><div className="container"><p className="eyebrow">THE NEXT STEP <span /></p><h2>Premium food packaging<br />starts with the <em>right material.</em></h2><p>Discover the Foil AromaShield range from Rivaru World.</p><div className="button-row"><button className="button button-gold" onClick={() => navigate('products')}>Explore products <ArrowRight size={17} /></button><button className="button button-ghost" onClick={() => navigate('contact')}>Contact us <MoveUpRight size={17} /></button></div></div></section>
+        <CTA navigate={navigate} />
       </main>
-
-      <footer className="footer"><div className="container footer-grid"><div><button className="brand footer-brand" onClick={() => navigate('home')}><span>RIVARU</span><strong>WORLD™</strong><small>WARUDKAR'S COMPANY™</small></button><p>Premium aluminium household<br />and catering products.</p></div><div><h4>Quick links</h4>{['about', 'products', 'applications', 'sustainability', 'gallery', 'contact'].map((link) => <button key={link} onClick={() => navigate(link)}>{link[0].toUpperCase() + link.slice(1)}</button>)}</div><div><h4>Products</h4><button onClick={() => navigate('products')}>Foil AromaShield</button><button onClick={() => navigate('products')}>Butter Paper</button></div><div><h4>Contact</h4><p>Pune, India</p><a href="tel:+447385814167">+44 7385814167</a><a href="tel:+912029512607">+91 20 2951 2607</a><a href="mailto:rivaru.world@gmail.com">rivaru.world@gmail.com</a></div></div><div className="container footer-bottom"><span>© 2026 Rivaru World. All Rights Reserved.</span><span>Made for freshness. Designed for the future.</span></div></footer>
-
-      {selectedProduct && <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} onContact={() => { setSelectedProduct(null); navigate('contact') }} />}
-      {lightboxIndex !== null && <Lightbox items={filteredGallery} index={lightboxIndex} onClose={() => setLightboxIndex(null)} onChange={setLightboxIndex} />}
+      <Footer navigate={navigate} />
+      {selectedProduct && (
+        <ProductModal
+          product={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+          onContact={() => {
+            setSelectedProduct(null);
+            navigate("contact");
+          }}
+        />
+      )}
     </div>
-  )
+  );
 }
-
-function ProductGroup({ title, products, onSelect, butter }) { return <div className={`product-group ${butter ? 'butter-group' : ''}`}><div className="group-title"><h3>{title}</h3><span>{products.length} formats</span></div><div className="product-grid">{products.map((product) => <article className="product-card" key={product.name}><div className="product-image"><img src={product.image} alt={product.name} loading="lazy" /><span>{product.category === 'Butter Paper' ? 'GREASEPROOF' : 'FOOD GRADE'}</span></div><div className="product-details"><p className="product-category">{product.category}</p><h3>{product.name}</h3><div className="product-spec"><span><b>{product.length}</b> Length</span><span><b>{product.widths.join(' / ')}</b> Width</span></div><button className="text-link" onClick={() => onSelect(product)}>View product <ArrowRight size={16} /></button></div></article>)}</div></div> }
-function Spec({ title, items }) { return <div className="spec-card"><h3>{title}</h3>{items.map((item) => <div key={item}><Check size={15} /><span>{item}</span></div>)}</div> }
-function ProductModal({ product, onClose, onContact }) { return <div className="modal-backdrop" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && onClose()}><div className="product-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button className="modal-close" onClick={onClose} aria-label="Close product details"><X /></button><div className="modal-image"><img src={product.image} alt={product.name} /></div><div className="modal-content"><p className="eyebrow dark">{product.category} <span /></p><h2 id="modal-title">{product.name}</h2><p>{product.description}</p><div className="modal-specs"><div><b>Length</b><span>{product.length}</span></div><div><b>Width</b><span>{product.widths.join(' / ')}</span></div><div><b>Thickness</b><span>{product.thickness.join(' / ')}</span></div></div><p className="modal-label">Applications</p><div className="application-tags">{product.applications.map((app) => <span key={app}>{app}</span>)}</div><button className="button button-navy" onClick={onContact}>Enquire about this product <ArrowRight size={16} /></button></div></div></div> }
-function Lightbox({ items, index, onClose, onChange }) { const item = items[index]; return <div className="lightbox" role="dialog" aria-modal="true" aria-label="Gallery image viewer"><button className="lightbox-close" onClick={onClose} aria-label="Close gallery"><X /></button><button className="lightbox-prev" onClick={() => onChange((index - 1 + items.length) % items.length)} aria-label="Previous image"><ChevronLeft /></button><img src={item.image} alt={item.title} /><div className="lightbox-caption"><span>{item.category}</span><b>{item.title}</b></div><button className="lightbox-next" onClick={() => onChange((index + 1) % items.length)} aria-label="Next image"><ChevronRight /></button></div> }
-function Contact() { const [sent, setSent] = useState(false); const [form, setForm] = useState({ name: '', email: '', message: '' }); const update = (event) => setForm({ ...form, [event.target.name]: event.target.value }); const submit = (event) => { event.preventDefault(); if (form.name && form.email && form.message) setSent(true) }; return <section className="contact section" id="contact"><div className="container contact-grid"><div className="contact-intro"><p className="eyebrow dark">LET'S WORK TOGETHER <span /></p><h2>Good things<br /><em>start here.</em></h2><p>For sales, export and product enquiries, get in touch with Rivaru World.</p><div className="contact-list"><div><span>Registered manufacturing address</span><b>Plot No. 80/12B, Ramtekdi Industrial Estate,<br />TP skim 2, Hadapsar, Pune-411013.</b></div><div><span>International sales / UK & Europe</span><a href="tel:+447385814167">+44 7385814167</a></div><div><span>India</span><a href="tel:+912029512607">+91 20 2951 2607</a></div><div><span>Email</span><a href="mailto:rivaru.world@gmail.com">rivaru.world@gmail.com</a></div></div></div><div className="contact-form-wrap">{sent ? <div className="success-state"><CircleCheck size={42} /><h3>Thank you, {form.name}.</h3><p>Your enquiry is ready to be reviewed. Please contact us directly by email or phone to continue the conversation.</p><button className="text-link" onClick={() => setSent(false)}>Send another enquiry <ArrowRight size={16} /></button></div> : <form onSubmit={submit}><div className="form-row"><label>Name<input name="name" value={form.name} onChange={update} required placeholder="Your name" /></label><label>Company<input name="company" onChange={update} placeholder="Company name" /></label></div><div className="form-row"><label>Email<input type="email" name="email" value={form.email} onChange={update} required placeholder="you@company.com" /></label><label>Phone<input name="phone" onChange={update} placeholder="Phone number" /></label></div><label>Product<select name="product"><option>Foil AromaShield</option>{allProducts.map((product) => <option key={product.name}>{product.name}</option>)}</select></label><label>Message<textarea name="message" value={form.message} onChange={update} required placeholder="Tell us what you are looking for..." rows="4" /></label><button className="button button-gold" type="submit">Send enquiry <ArrowRight size={17} /></button><small>Frontend enquiry form. No message is sent automatically.</small></form>}</div></div></section> }
-
-export default App
