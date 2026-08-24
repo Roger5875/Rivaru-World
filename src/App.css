@@ -96,6 +96,7 @@ button {
   height: 100vh;
   max-height: 940px;
   position: relative;
+  overflow: hidden;
   background: var(--navy);
   color: #fff;
   display: flex;
