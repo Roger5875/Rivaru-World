@@ -7,7 +7,6 @@ const links = [
   ["products", "Products"],
   ["applications", "Applications"],
   ["sustainability", "Sustainability"],
-  ["gallery", "Gallery"],
   ["contact", "Contact"],
 ];
 

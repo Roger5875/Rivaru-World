@@ -23,7 +23,12 @@ function SignatureProduct({ onSelect, product }) {
         </button>
       </div>
       <div className="signature-visual">
-        <img src={foilImage} alt="Aluminium foil protecting a prepared meal" />
+        <img
+          src={foilImage}
+          alt="Aluminium foil protecting a prepared meal"
+          loading="lazy"
+          decoding="async"
+        />
         <div className="feature-float">
           <Package />
           <span>

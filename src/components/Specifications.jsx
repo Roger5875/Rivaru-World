@@ -32,7 +32,12 @@ export default function Specifications() {
           Built for the pace of real kitchens.
         </p>
         <div className="specs-image">
-          <img src={kitchenImage} alt="Professional kitchen preparation" />
+          <img
+            src={kitchenImage}
+            alt="Professional kitchen preparation"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
       </div>
       <div className="spec-grid">

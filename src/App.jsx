@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  butterPaperProducts,
-  foilProducts,
-  galleryItems,
-} from "./data/products";
+import { butterPaperProducts, foilProducts } from "./data/products";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Stats from "./components/Stats";
@@ -15,7 +11,6 @@ import Specifications from "./components/Specifications";
 import Applications from "./components/Applications";
 import Benefits from "./components/Benefits";
 import Sustainability from "./components/Sustainability";
-import Gallery from "./components/Gallery";
 import Contact from "./components/Contact";
 import CTA from "./components/CTA";
 import Footer from "./components/Footer";
@@ -26,8 +21,6 @@ export default function App() {
   const [activeSection, setActiveSection] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [galleryFilter, setGalleryFilter] = useState("All");
-  const [lightboxIndex, setLightboxIndex] = useState(null);
 
   useEffect(() => {
     const sections = document.querySelectorAll("main section[id]");
@@ -45,12 +38,11 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow =
-      selectedProduct || lightboxIndex !== null ? "hidden" : "";
+    document.body.style.overflow = selectedProduct ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [selectedProduct, lightboxIndex]);
+  }, [selectedProduct]);
 
   const navigate = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -83,13 +75,6 @@ export default function App() {
         <Applications />
         <Benefits />
         <Sustainability />
-        <Gallery
-          items={galleryItems}
-          filter={galleryFilter}
-          setFilter={setGalleryFilter}
-          lightboxIndex={lightboxIndex}
-          setLightboxIndex={setLightboxIndex}
-        />
         <Contact />
         <CTA navigate={navigate} />
       </main>

@@ -24,7 +24,6 @@ export default function Footer({ navigate }) {
             "products",
             "applications",
             "sustainability",
-            "gallery",
             "contact",
           ].map((link) => (
             <button key={link} onClick={() => navigate(link)}>

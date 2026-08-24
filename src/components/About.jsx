@@ -8,6 +8,8 @@ export default function About() {
         <img
           src={aboutImage}
           alt="Fresh ingredients prepared in a modern kitchen"
+          loading="lazy"
+          decoding="async"
         />
         <span className="image-note">
           SINCE

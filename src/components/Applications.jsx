@@ -48,7 +48,7 @@ export default function Applications() {
         <div className="application-grid">
           {applications.map(([title, text, image], index) => (
             <article className="application-card" key={title}>
-              <img src={image} alt={title} />
+              <img src={image} alt={title} loading="lazy" decoding="async" />
               <div>
                 <span>0{index + 1}</span>
                 <h3>{title}</h3>

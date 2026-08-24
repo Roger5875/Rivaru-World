@@ -1,8 +1,3 @@
-import foodImage from "../assets/images/food/fresh-food.jpg";
-import bakingImage from "../assets/images/food/baking.jpg";
-import packagingImage from "../assets/images/gallery/packaging.jpg";
-import butterPaperImage from "../assets/images/gallery/butter-paper.jpg";
-import wrappedFoodImage from "../assets/images/gallery/wrapped-food.jpg";
 import foil6mImage from "../assets/images/products/6 meter.png";
 import foil9mImage from "../assets/images/products/9 meter.png";
 import foil18mImage from "../assets/images/products/18 meter.png";
@@ -59,30 +54,5 @@ export const butterPaperProducts = ["20m", "25m", "50m", "75m"].map(
       "High-quality food-safe greaseproof paper with a non-stick surface, suitable for baking, wrapping and takeaway food.",
   }),
 );
-
-export const galleryItems = [
-  { category: "Food", title: "Preserve every detail", image: foodImage },
-  { category: "Products", title: "Foil AromaShield", image: foil72mImage },
-  {
-    category: "Lifestyle",
-    title: "Made for modern kitchens",
-    image: bakingImage,
-  },
-  {
-    category: "Packaging",
-    title: "A clean protective barrier",
-    image: packagingImage,
-  },
-  {
-    category: "Butter Paper",
-    title: "Bake with confidence",
-    image: butterPaperImage,
-  },
-  {
-    category: "Food",
-    title: "Freshness, wrapped in",
-    image: wrappedFoodImage,
-  },
-];
 
 export const allProducts = [...foilProducts, ...butterPaperProducts];
