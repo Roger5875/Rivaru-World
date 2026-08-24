@@ -56,9 +56,6 @@ export default function Hero({ navigate }) {
           </small>
         </div>
       </div>
-      <button className="scroll-cue" onClick={() => navigate("about")}>
-        <ArrowDown size={16} /> Scroll to discover
-      </button>
     </section>
   );
 }
