@@ -48,6 +48,13 @@ export default function Footer({ navigate }) {
       <div className="container footer-bottom">
         <span>© 2026 Rivaru World. All Rights Reserved.</span>
         <span>Made for freshness. Designed for the future.</span>
+        <a
+          href="https://portfolio-smoky-two-41.vercel.app/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Created by Aniruddha Deshpande
+        </a>
       </div>
     </footer>
   );

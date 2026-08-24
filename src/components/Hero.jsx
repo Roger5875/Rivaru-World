@@ -1,6 +1,5 @@
 import { ArrowDown, ArrowRight, MoveUpRight } from "lucide-react";
-
-const foilImage = "/images/products/foil-72m.png";
+import foilImage from "../assets/images/products/72 Meter New.png";
 
 export default function Hero({ navigate }) {
   return (

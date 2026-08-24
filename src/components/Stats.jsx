@@ -10,7 +10,7 @@ export default function Stats() {
         <span>Recyclable aluminium</span>
       </div>
       <div>
-        <strong>UK & worldwide</strong>
+        <strong>India, UK & worldwide</strong>
         <span>Markets</span>
       </div>
       <div>

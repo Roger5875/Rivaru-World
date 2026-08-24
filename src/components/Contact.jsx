@@ -4,12 +4,32 @@ import { useState } from "react";
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const update = (event) =>
     setForm({ ...form, [event.target.name]: event.target.value });
-  const submit = (event) => {
+  const submit = async (event) => {
     event.preventDefault();
-    if (form.name && form.email && form.message) setSent(true);
+    if (!form.name || !form.email || !form.message) return;
+
+    setSubmitting(true);
+    setError("");
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/rivaru.world@gmail.com", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(event.currentTarget),
+      });
+
+      if (!response.ok) throw new Error("Unable to send enquiry");
+      setSent(true);
+    } catch {
+      setError("We could not send your enquiry. Please email us directly.");
+    } finally {
+      setSubmitting(false);
+    }
   };
   return (
     <section className="contact section" id="contact">
@@ -126,11 +146,12 @@ export default function Contact() {
                   rows="4"
                 />
               </label>
-              <button className="button button-gold" type="submit">
-                Send enquiry <ArrowRight size={17} />
+              <button className="button button-gold" type="submit" disabled={submitting}>
+                {submitting ? "Sending..." : "Send enquiry"} <ArrowRight size={17} />
               </button>
+              {error && <small>{error}</small>}
               <small>
-                Frontend enquiry form. No message is sent automatically.
+                Your enquiry will be sent securely to our team.
               </small>
             </form>
           )}

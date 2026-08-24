@@ -1,6 +1,5 @@
 import { ArrowRight, Package } from "lucide-react";
-
-const foilImage = "/images/products/foil-72m.png";
+import foilImage from "../assets/images/products/30 Meter.png";
 
 function SignatureProduct({ onSelect, product }) {
   return (
