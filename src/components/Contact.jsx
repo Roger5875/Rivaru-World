@@ -54,7 +54,7 @@ export default function Contact() {
             <div>
               <span>Registered manufacturing address</span>
               <a
-                href="https://maps.app.goo.gl/Fbdhex86wzU7iww8A"
+                href="https://maps.app.goo.gl/zg18RGYzADZj57nj8"
                 target="_blank"
                 rel="noreferrer"
               >
