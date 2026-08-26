@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import kitchenImage from "../assets/images/food/professional-kitchen.jpg";
+import certificateImage from "../assets/images/gallery/RIVARU WORLD-QMS-1.png";
 
 function Spec({ title, items }) {
   return (
@@ -61,6 +62,22 @@ export default function Specifications() {
             "Food safety: Compliant with UK Food-Contact Standards",
           ]}
         />
+      </div>
+      <div className="certificate-showcase">
+        <img
+          src={certificateImage}
+          alt="Rivaru World ISO 9001:2015 certificate"
+          loading="lazy"
+          decoding="async"
+        />
+        <span>
+          <strong>Certified quality, built into every product.</strong>
+          <small>
+            Rivaru World is certified to ISO 9001:2015 for quality management
+            systems covering aluminium foil, paper conversion and packaging
+            solutions.
+          </small>
+        </span>
       </div>
     </section>
   );

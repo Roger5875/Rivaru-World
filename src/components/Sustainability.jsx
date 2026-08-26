@@ -1,4 +1,4 @@
-import { Check } from "lucide-react";
+import { Check, Recycle } from "lucide-react";
 
 const points = [
   "100% recyclable aluminium",
@@ -40,7 +40,8 @@ export default function Sustainability() {
           <div className="orbit-ring ring-one" />
           <div className="orbit-ring ring-two" />
           <div className="recycle-symbol">
-            ↻<small>100%</small>
+            <Recycle size={82} strokeWidth={1.5} />
+            <small>100%</small>
           </div>
         </div>
       </div>

@@ -17,11 +17,14 @@ export default function Contact() {
     setError("");
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/rivaru.world@gmail.com", {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: new FormData(event.currentTarget),
-      });
+      const response = await fetch(
+        "https://formsubmit.co/ajax/rivaru.world@gmail.com",
+        {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: new FormData(event.currentTarget),
+        },
+      );
 
       if (!response.ok) throw new Error("Unable to send enquiry");
       setSent(true);
@@ -50,11 +53,15 @@ export default function Contact() {
           <div className="contact-list">
             <div>
               <span>Registered manufacturing address</span>
-              <b>
+              <a
+                href="https://maps.app.goo.gl/Fbdhex86wzU7iww8A"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Plot No. 80/12B, Ramtekdi Industrial Estate,
                 <br />
                 TP skim 2, Hadapsar, Pune-411013.
-              </b>
+              </a>
             </div>
             <div>
               <span>International sales / UK & Europe</span>
@@ -146,13 +153,16 @@ export default function Contact() {
                   rows="4"
                 />
               </label>
-              <button className="button button-gold" type="submit" disabled={submitting}>
-                {submitting ? "Sending..." : "Send enquiry"} <ArrowRight size={17} />
+              <button
+                className="button button-gold"
+                type="submit"
+                disabled={submitting}
+              >
+                {submitting ? "Sending..." : "Send enquiry"}{" "}
+                <ArrowRight size={17} />
               </button>
               {error && <small>{error}</small>}
-              <small>
-                Your enquiry will be sent securely to our team.
-              </small>
+              <small>Your enquiry will be sent securely to our team.</small>
             </form>
           )}
         </div>

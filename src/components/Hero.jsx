@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowRight, MoveUpRight } from "lucide-react";
+import { ArrowRight, MoveUpRight } from "lucide-react";
 import foilImage from "../assets/images/products/72 Meter Gnt.png";
 
 export default function Hero({ navigate }) {
