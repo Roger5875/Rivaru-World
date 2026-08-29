@@ -27,7 +27,7 @@ export default function About() {
           <em>with your ambition.</em>
         </h2>
         <p>
-          Rivaru World is a trusted manufacturer of high-quality aluminium
+          Rivaru World is a trusted ISO certified manufacturer of high-quality aluminium
           household and catering products, proudly based in India and supplying
           customers across the UK and international markets.
         </p>

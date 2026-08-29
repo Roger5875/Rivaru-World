@@ -72,6 +72,10 @@ export default function Contact() {
               <a href="tel:+912029512607">+91 20 2951 2607</a>
             </div>
             <div>
+              <span>West Maharashtra Sales - Shivraj Shendge</span>
+              <a href="tel:+918830126234">+91 883 012 6234</a>
+            </div>
+            <div>
               <span>Email</span>
               <a href="mailto:rivaru.world@gmail.com">rivaru.world@gmail.com</a>
             </div>

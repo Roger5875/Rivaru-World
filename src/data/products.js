@@ -32,7 +32,7 @@ export const foilProducts = ["6m", "9m", "18m", "30m", "40m", "50m", "72m"].map(
     name: `Foil AromaShield ${length}`,
     category: "Aluminium Foil",
     length,
-    widths: ["30cm", "45cm", "60cm"],
+    widths: ["30cm", "45cm"],
     thickness: ["11μm", "18μm"],
     applications: ["Home cooking", "Baking", "Food wrapping", "Catering"],
     image: foilImages[length],
